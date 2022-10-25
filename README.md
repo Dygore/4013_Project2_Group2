@@ -6,11 +6,11 @@ This project is for Group 2's ECEN 4013 project 2, all of the code contained wil
 ## Details
 The current plan is to have two seperate circuits based on difficulty. The first circuit will be the main focus with the details contained below, the second circuit details have not been finalized yet.
 
-Micro controller: Raspberry Pi Pico
-GPS: Adafruit Mini GPS PA1010D
-Radio: HC05  IMU Adafruit BNO055
-SD Card:  HW-125 SPI Micro SD Board
-Battery: LP103454
+Micro controller: Raspberry Pi Pico  
+GPS: Adafruit Mini GPS PA1010D  
+Radio: HC05  IMU Adafruit BNO055  
+SD Card:  HW-125 SPI Micro SD Board  
+Battery: LP103454  
 
 ## References
 TBD
