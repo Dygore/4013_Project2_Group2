@@ -13,6 +13,6 @@ SD Card:  HW-125 SPI Micro SD Board
 Battery: LP103454  
 
 ## References
-TBD
+-https://microcontrollerslab.com/neo-6m-gps-module-raspberry-pi-pico-micropython/
 
 Dylan Gore 10/24/2022
