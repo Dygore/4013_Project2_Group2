@@ -8,7 +8,8 @@ The current plan is to have two seperate circuits based on difficulty. The first
 
 Micro controller: Raspberry Pi Pico  
 GPS: Adafruit Mini GPS PA1010D  
-Radio: HC05  IMU Adafruit BNO055  
+Radio: HC05  
+IMU: Adafruit BNO055  
 SD Card:  HW-125 SPI Micro SD Board  
 Battery: LP103454  
 
