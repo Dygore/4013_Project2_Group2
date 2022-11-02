@@ -22,15 +22,9 @@ HeightGeo = ""
 GPStime = ""
 
 def getGPSData(gpsModule):
-    global Status, timeout, latitude, longitude, satellites, GPStime, HeightGeo
-    
-    #Current time + 10 seconds
-    timeout = time.time() + 10
+    global Status, latitude, longitude, satellites, GPStime, HeightGeo
     
     while True:
-        #Read UART line
-        gpsModule.readline()
-        
         #Get second line and add it to buffer
         buffer = str(gpsModule.readline())
         
@@ -38,27 +32,20 @@ def getGPSData(gpsModule):
         section = buffer.split(',')
     
         #We only want GPGGA as it contains all the data that is needed for this project
-        if (section[0] == "b'$GPGGA" and len(section) == 15):
-            if(section[1] and section[2] and section[3] and section[4] and section[5] and section[6] and section[7] and section[8] and section[9]):
-                print(buff)
-                
-                latitude = convertToDegree(section[2])
-                if (section[3] == 'S'):
-                    latitude = '-' + latitude
-                longitude = convertToDegree(section[4])
-                if (section[5] == 'W'):
-                    longitude = '-' + longitude
-                satellites = section[7]
-                HeightGeo = section[7]
-                GPStime = section[1][0:2] + ":" + section[1][2:4] + ":" + section[1][4:6]
-                Status = True
-                break
-                
-        if (time.time() > timeout):
-            timeout = True
+        if (section[0] == "b'$GPGGA"):
+            latitude = convertToDegree(section[2])
+            if (section[3] == 'S'):
+                latitude = '-' + latitude
+            longitude = convertToDegree(section[4])
+            if (section[5] == 'W'):
+                longitude = '-' + longitude
+            satellites = section[7]
+            HeightGeo = section[9]
+            GPStime = section[1][0:2] + ":" + section[1][2:4] + ":" + section[1][4:6]
+            Status = True
             break
-        utime.sleep_ms(500)
-        
+                
+        utime.sleep_ms(100)
 def convertToDegree(RawDegrees):
 
     RawAsFloat = float(RawDegrees)
@@ -75,17 +62,6 @@ while True:
     getGPSData(gpsModule)
 
     if(Status == True):
-        print("Printing GPS data...")
-        print(" ")
-        print("Latitude: "+latitude)
-        print("Longitude: "+longitude)
-        print("Satellites: " +satellites)
-        print("Height ASL Geoid: " + HeightGeo)
-        print("Time: "+GPStime)
-        print("----------------------")
-        
+        print("{"+latitude+","+longitude+"," +satellites+"," + HeightGeo+","+GPStime + "\n")   
         Status = False
         
-    if(timeout == True):
-        print("No GPS data is found.")
-        timeout = False
